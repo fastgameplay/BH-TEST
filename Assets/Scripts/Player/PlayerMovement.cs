@@ -8,6 +8,9 @@ public class PlayerMovement : MonoBehaviour{
             _movement = new Vector3(value.x,0f,value.y);
         }  
     }
+
+    [Header("Dash")]
+    [SerializeField] HitDetector hitDetector;
     [Header("Movement")]
     [SerializeField] Transform _directionTarget;
     [SerializeField] float _speed;
@@ -41,14 +44,13 @@ public class PlayerMovement : MonoBehaviour{
     }
 
     public void Dash(){
+        Vector3 oldPosition = transform.position;
         if(_movement != Vector3.zero)
             Move(_movement, _dashDistance);
         else{
             Aim(Vector3.forward);
             Move(Vector3.forward, _dashDistance);
         }
-
-        
-
+        hitDetector.hit(oldPosition,transform.position,_playerModel.rotation);
     }
 }
