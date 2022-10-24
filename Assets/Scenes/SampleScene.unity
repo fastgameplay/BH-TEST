@@ -455,9 +455,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2b7322f6564d86449f8247a64b189dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerModel: {fileID: 617567752}
   _directionTarget: {fileID: 351416918}
   _speed: 20
+  _dashDistance: 100
+  _playerModel: {fileID: 617567752}
   _rotationSpeed: 800
 --- !u!1 &963194225
 GameObject:
