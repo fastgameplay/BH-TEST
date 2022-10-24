@@ -164,7 +164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 351416918}
   m_Layer: 0
-  m_Name: TargetPoint
+  m_Name: DirectionTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 617567750}
   - component: {fileID: 617567749}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: PlayerModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -418,6 +418,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 817266450}
+  - component: {fileID: 817266451}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -442,6 +443,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &817266451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817266449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2b7322f6564d86449f8247a64b189dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerModel: {fileID: 617567752}
+  _directionTarget: {fileID: 351416918}
+  _speed: 20
+  _rotationSpeed: 800
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -539,9 +556,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19ebcab346a7366479b8bc7753d1a02c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 351416917}
-  rotationSpeed: 6
-  offset: {x: 6, y: -2, z: 0}
+  _directionTarget: {fileID: 351416917}
+  _rotationSpeed: 6
+  _offset: {x: 0, y: 3, z: -6}
 --- !u!1 &1078383989
 GameObject:
   m_ObjectHideFlags: 0
@@ -888,7 +905,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8d28da1bcf45528408aa7b9dd1acc9d8, type: 2}
+  - {fileID: 2100000, guid: c181c23a6120fbe4aadd5bb53a58dd78, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
