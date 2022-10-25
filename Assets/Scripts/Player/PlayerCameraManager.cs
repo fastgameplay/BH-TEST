@@ -2,11 +2,12 @@ using Mirror;
 using UnityEngine;
 
 public class PlayerCameraManager : NetworkBehaviour{
+    [SerializeField] Transform _directionTarget;
     TPPCamera tppCamera;
     public override void OnStartLocalPlayer()
     {
         tppCamera = Camera.main.GetComponent<TPPCamera>();
-        tppCamera.DirectionTarget = transform;
+        tppCamera.DirectionTarget = _directionTarget;
     }
 
     void Update(){

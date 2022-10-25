@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 605656598832824810}
   - component: {fileID: -1898147653200167506}
   - component: {fileID: 7887913692187027573}
-  - component: {fileID: 2185558955456288755}
+  - component: {fileID: 2515220834501309329}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -119,13 +119,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  hitDetector: {fileID: 0}
-  _directionTarget: {fileID: 7887913692794922288}
   _speed: 20
   _dashDistance: 1000
+  _directionTarget: {fileID: 7887913692794922288}
   _playerModel: {fileID: 7887913692523020654}
   _rotationSpeed: 800
---- !u!114 &2185558955456288755
+--- !u!114 &2515220834501309329
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,6 +136,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b96ff04cab2f6047836638c999286ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  _directionTarget: {fileID: 7887913692794922288}
 --- !u!1 &7887913692523020642
 GameObject:
   m_ObjectHideFlags: 0
