@@ -1,25 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour{
+public class PlayerMovement : NetworkBehaviour{
     public Vector2 Movement { 
         set{
             _movement = new Vector3(value.x,0f,value.y);
         }  
     }
-
-    [Header("Dash")]
-    [SerializeField] HitDetector hitDetector;
     [Header("Movement")]
-    [SerializeField] Transform _directionTarget;
     [SerializeField] float _speed;
     [SerializeField] float _dashDistance;
     [Header("Rotation")]
+    [SerializeField] Transform _directionTarget;
     [SerializeField] Transform _playerModel;
     [SerializeField] float _rotationSpeed;
     Vector3 _movement;
+    
     void Update(){
+        if (!isLocalPlayer) { return; }
+
         Movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         
         Move(_movement, _speed);
@@ -27,7 +26,7 @@ public class PlayerMovement : MonoBehaviour{
 
         Aim(_movement);
 
-        if (Input.GetKeyDown("space")){
+        if (Input.GetMouseButtonDown(0)){
             Dash();
         }
     }
@@ -51,6 +50,6 @@ public class PlayerMovement : MonoBehaviour{
             Aim(Vector3.forward);
             Move(Vector3.forward, _dashDistance);
         }
-        hitDetector.hit(oldPosition,transform.position,_playerModel.rotation);
+        //hitDetector.hit(oldPosition,transform.position,_playerModel.rotation);
     }
 }

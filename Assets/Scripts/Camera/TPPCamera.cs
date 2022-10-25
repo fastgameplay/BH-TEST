@@ -1,28 +1,26 @@
 using UnityEngine;
-
 public class TPPCamera : MonoBehaviour{
 
     public float Horizontal {set {horizontal = value * _rotationSpeed;} }
     float horizontal;
-    [SerializeField] GameObject _directionTarget;
+    public Transform DirectionTarget{private get; set;}
     [SerializeField] float _rotationSpeed;
     [SerializeField] Vector3 _offset;
 
     void LateUpdate(){
-        Horizontal= Input.GetAxis("Mouse X");
-
+        if(DirectionTarget == null) return;
         CameraMovement();
         
-        transform.LookAt(_directionTarget.transform);
+        transform.LookAt(DirectionTarget);
     }
 
     private void CameraMovement(){
-        _directionTarget.transform.Rotate(0,horizontal,0);
+        DirectionTarget.transform.Rotate(0,horizontal,0);
 
-        float desiredAngle = _directionTarget.transform.eulerAngles.y;
+        float desiredAngle = DirectionTarget.eulerAngles.y;
 
         Quaternion rotation = Quaternion.Euler(0,desiredAngle,0);
         
-        transform.position = _directionTarget.transform.position + (rotation * _offset);
+        transform.position = DirectionTarget.position + (rotation * _offset);
     }
 }
