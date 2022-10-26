@@ -1,25 +1,24 @@
 using Mirror;
 using UnityEngine;
-
+[RequireComponent(typeof(PlayerCollision))]
 public class PlayerMovement : NetworkBehaviour{
-    public Vector2 Movement { 
-        set{
-            _movement = new Vector3(value.x,0f,value.y);
-        }  
-    }
     [Header("Movement")]
     [SerializeField] float _speed;
     [SerializeField] float _dashDistance;
     [Header("Rotation")]
-    [SerializeField] Transform _directionTarget;
     [SerializeField] Transform _playerModel;
+    [SerializeField] Transform _directionTarget;
     [SerializeField] float _rotationSpeed;
     Vector3 _movement;
-    
+    PlayerCollision _playerCollision;    
+
+    void Awake(){
+        _playerCollision = GetComponent<PlayerCollision>();
+    }
     void Update(){
         if (!isLocalPlayer) { return; }
 
-        Movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        _movement = new Vector3(Input.GetAxis("Horizontal"),0, Input.GetAxis("Vertical"));
         
         Move(_movement, _speed);
 
@@ -41,15 +40,10 @@ public class PlayerMovement : NetworkBehaviour{
             _playerModel.forward = Vector3.Slerp(_playerModel.forward, aimDirection.normalized, Time.deltaTime * _rotationSpeed);
         }
     }
+    
 
     public void Dash(){
-        Vector3 oldPosition = transform.position;
-        if(_movement != Vector3.zero)
-            Move(_movement, _dashDistance);
-        else{
-            Aim(Vector3.forward);
-            Move(Vector3.forward, _dashDistance);
-        }
-        //hitDetector.hit(oldPosition,transform.position,_playerModel.rotation);
+        _playerCollision.CheckHitDirection(_playerModel.transform.right,_dashDistance);
+        transform.position += _playerModel.transform.right * _dashDistance;
     }
 }
