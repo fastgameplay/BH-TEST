@@ -7,6 +7,9 @@ public class TPPCamera : MonoBehaviour{
     [SerializeField] float _rotationSpeed;
     [SerializeField] Vector3 _offset;
 
+    void Awake(){
+        Cursor.lockState = CursorLockMode.Confined;
+    }
     void LateUpdate(){
         if(DirectionTarget == null) return;
         CameraMovement();

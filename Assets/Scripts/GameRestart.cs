@@ -4,22 +4,22 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GameRestart : NetworkBehaviour{
+    [SyncVar(hook = nameof(OnWinnerTextChanged))]
+    public string WinnerString;
+
     [SerializeField] Text _winnerText;
     [SerializeField] float _showWinnerSeconds;
-    /// <summary>
-    /// Awake is called when the script instance is being loaded.
-    /// </summary>
-    void Awake(){
-        _winnerText.gameObject.SetActive(false);
-    }
-    public void EndGame(string winner){
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        _winnerText.text = "WINNER : " + winner;
-        StartCoroutine(GameOverCourutine());
 
+    void OnWinnerTextChanged(string _Old, string _New){
+        _winnerText.gameObject.SetActive(true);
+        _winnerText.text = _New;
+    }
+
+    public void EndGame(string winner){
+        WinnerString = "WINNER : " + winner;
+        StartCoroutine(GameOverCourutine());
     }
     IEnumerator GameOverCourutine(){
-        _winnerText.gameObject.SetActive(true);
         yield return new WaitForSeconds(_showWinnerSeconds);
         NetworkManager.singleton.ServerChangeScene("MainScene");
     }

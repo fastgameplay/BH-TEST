@@ -3,11 +3,12 @@ using Mirror;
 using UnityEngine;
 public class PlayerDeathManager : NetworkBehaviour
 {
-    [SerializeField] float _deathTimeInSeconds;
-    private PlayerInfo _playerInfo;
-
     [SyncVar]
     public bool IsImmune;
+    [SerializeField] float _deathTimeInSeconds;
+    PlayerInfo _playerInfo;
+
+
     void OnDrawGizmosSelected () {
         if (_deathTimeInSeconds < 0) {
             _deathTimeInSeconds = 0;

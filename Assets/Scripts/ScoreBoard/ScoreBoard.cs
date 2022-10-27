@@ -5,8 +5,11 @@ using UnityEngine;
 using UnityEngine.UI;
 [RequireComponent(typeof(GameRestart))]
 public class ScoreBoard : NetworkBehaviour{
+
     [SyncVar(hook = nameof(OnScoreBoardChanged))]
     public string ScoreBoardStr = "";
+    
+    [Header("Settings")]
     public ScoreBoardRefrence scoreBoardRefrence; 
     [SerializeField] int _maxScore;
     [SerializeField] Text _scoreBoardText;
@@ -15,20 +18,20 @@ public class ScoreBoard : NetworkBehaviour{
     List<PlayerInfo> _playerInfos = new List<PlayerInfo>();
     bool isGameOver = false;
     public void Refresh(){
-        if(isGameOver) return;
-
         string tempBoardStr = "";
+        if(!isGameOver){
+            for (int i = 0; i < _playerInfos.Count; i++){
+                tempBoardStr += _playerInfos[i].PlayerName + " : " + _playerInfos[i].PlayerScore.ToString() + " \n";
+                //check if is winner
+                if(_playerInfos[i].PlayerScore == _maxScore){
+                    GetComponent<GameRestart>().EndGame(_playerInfos[i].PlayerName);
+                    isGameOver = true;
+                    break;
 
-        for (int i = 0; i < _playerInfos.Count; i++){
-            tempBoardStr += _playerInfos[i].PlayerName + " : " + _playerInfos[i].PlayerScore.ToString() + " \n";
-            if(_playerInfos[i].PlayerScore == _maxScore){
-                GetComponent<GameRestart>().EndGame(_playerInfos[i].PlayerName);
-                tempBoardStr = "";
-                isGameOver = true;
-                break;
-
+                }
             }
         }
+       
         ScoreBoardStr = tempBoardStr;
     }
     void OnScoreBoardChanged(string _Old, string _New){

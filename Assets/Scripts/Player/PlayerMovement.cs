@@ -2,12 +2,13 @@ using Mirror;
 using UnityEngine;
 [RequireComponent(typeof(PlayerCollision))]
 public class PlayerMovement : NetworkBehaviour{
-    [Header("Movement")]
-    [SerializeField] float _speed;
-    [SerializeField] float _dashDistance;
-    [Header("Rotation")]
+    [Header("Refrences")]
     [SerializeField] Transform _playerModel;
     [SerializeField] Transform _directionTarget;
+    
+    [Header("Movement settings")]
+    [SerializeField] float _speed;
+    [SerializeField] float _dashDistance;
     [SerializeField] float _rotationSpeed;
     Vector3 _movement;
     PlayerCollision _playerCollision;    
@@ -43,7 +44,7 @@ public class PlayerMovement : NetworkBehaviour{
     
 
     public void Dash(){
-        _playerCollision.CheckHitDirection(_playerModel.transform.right,_dashDistance);
+        _playerCollision.CheckDirection(_playerModel.transform.right,_dashDistance);
         transform.position += _playerModel.transform.right * _dashDistance;
     }
 }
