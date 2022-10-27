@@ -5,8 +5,9 @@ public class PlayerDeathManager : NetworkBehaviour
 {
     [SerializeField] float _deathTimeInSeconds;
     private PlayerInfo _playerInfo;
-    private bool _isDead;
     
+    [SyncVar]
+    public bool IsImmune;
     void OnDrawGizmosSelected () {
         if (_deathTimeInSeconds < 0) {
             _deathTimeInSeconds = 0;
@@ -15,22 +16,28 @@ public class PlayerDeathManager : NetworkBehaviour
 
 
     void Awake(){
-        _isDead = false;
+        IsImmune = false;
         _playerInfo = GetComponent<PlayerInfo>();
     }
+
+    [Command(requiresAuthority = false)] // <3
     public void Hit(){
-        if(!_isDead){
+        if(IsImmune == false){
+            IsImmune = true;
             StartCoroutine(HitCorutine(_deathTimeInSeconds));
         }
     }
 
-    IEnumerator HitCorutine(float Seconds){
-        _isDead = true;
+    IEnumerator HitCorutine(float seconds){
+        Debug.Log(IsImmune + ",expected : true ; From PlayerDeathManager First;");
+
         Color oldColor = _playerInfo.PlayerColor;
         _playerInfo.PlayerColor = Color.red;
-        yield return new WaitForSeconds(Seconds);
+        yield return new WaitForSeconds(seconds);
         _playerInfo.PlayerColor = oldColor;
-        _isDead = false;
+        IsImmune = false;
+        Debug.Log(IsImmune + ",expected : false ; From PlayerDeathManager Second;");
+
     }
    
 }
