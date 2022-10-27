@@ -10,11 +10,10 @@ public class PlayerCollision : MonoBehaviour
             if(rayHit.transform.tag == "Player"){
                 PlayerDeathManager pdm = rayHit.transform.GetComponent<PlayerDeathManager>();
                 if(pdm.IsImmune == false){
-                    Debug.Log(pdm.IsImmune + "From PlayerCollision First;");
                     pdm.Hit();
-                    Debug.Log(pdm.IsImmune + "From PlayerCollision Second;");
 
-                    GetComponent<PlayerInfo>().PlayerScore ++;
+                    GetComponent<PlayerInfo>().CmdAddScore();
+                    Debug.Log("PlayerScore is " + GetComponent<PlayerInfo>().PlayerScore);
                 }
             }
         }

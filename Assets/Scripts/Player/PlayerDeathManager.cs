@@ -5,7 +5,7 @@ public class PlayerDeathManager : NetworkBehaviour
 {
     [SerializeField] float _deathTimeInSeconds;
     private PlayerInfo _playerInfo;
-    
+
     [SyncVar]
     public bool IsImmune;
     void OnDrawGizmosSelected () {
@@ -29,14 +29,12 @@ public class PlayerDeathManager : NetworkBehaviour
     }
 
     IEnumerator HitCorutine(float seconds){
-        Debug.Log(IsImmune + ",expected : true ; From PlayerDeathManager First;");
 
         Color oldColor = _playerInfo.PlayerColor;
         _playerInfo.PlayerColor = Color.red;
         yield return new WaitForSeconds(seconds);
         _playerInfo.PlayerColor = oldColor;
         IsImmune = false;
-        Debug.Log(IsImmune + ",expected : false ; From PlayerDeathManager Second;");
 
     }
    

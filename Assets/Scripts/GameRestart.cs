@@ -12,14 +12,14 @@ public class GameRestart : NetworkBehaviour{
     void Awake(){
         _winnerText.gameObject.SetActive(false);
     }
-    public void EndGame(string winner, ScoreBoard scoreBoard){
+    public void EndGame(string winner){
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         _winnerText.text = "WINNER : " + winner;
         StartCoroutine(GameOverCourutine());
 
     }
     IEnumerator GameOverCourutine(){
-        _winnerText.gameObject.SetActive(false);
+        _winnerText.gameObject.SetActive(true);
         yield return new WaitForSeconds(_showWinnerSeconds);
         NetworkManager.singleton.ServerChangeScene("MainScene");
     }
