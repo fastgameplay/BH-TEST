@@ -1025,8 +1025,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _offset: {x: 0, y: 3, z: -6}
-  _rotationSpeed: {x: 6, y: 3}
-  _clampVerticalRotation: {x: -30, y: 30}
+  _horizontalSpeed: 6
+  _verticalSpeed: 3
+  _veticalMin: -30
+  _verticalMax: 45
 --- !u!1 &982721514
 GameObject:
   m_ObjectHideFlags: 0
