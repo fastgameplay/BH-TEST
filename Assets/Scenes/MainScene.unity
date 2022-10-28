@@ -1024,8 +1024,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19ebcab346a7366479b8bc7753d1a02c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationSpeed: 6
   _offset: {x: 0, y: 3, z: -6}
+  _rotationSpeed: {x: 6, y: 3}
+  _clampVerticalRotation: {x: -30, y: 30}
 --- !u!1 &982721514
 GameObject:
   m_ObjectHideFlags: 0
@@ -1635,6 +1636,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  WinnerString: 
   _winnerText: {fileID: 261924644}
   _showWinnerSeconds: 5
 --- !u!114 &1676850533

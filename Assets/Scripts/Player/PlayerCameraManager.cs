@@ -13,5 +13,6 @@ public class PlayerCameraManager : NetworkBehaviour{
     void Update(){
         if (!isLocalPlayer) { return; }
         tppCamera.Horizontal = Input.GetAxis("Mouse X");
+        tppCamera.Vertical = Input.GetAxis("Mouse Y");
     }
 }
